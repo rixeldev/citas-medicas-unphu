@@ -6,11 +6,11 @@ import { EncdescService } from 'src/app/services/encdesc.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'],
+  selector: 'app-medicos',
+  templateUrl: './medicos.component.html',
+  styleUrls: ['./medicos.component.css'],
 })
-export class UsuarioComponent implements OnInit {
+export class MedicosComponent implements OnInit {
   constructor(
     private encryp: EncdescService,
     private fb: FormBuilder,
@@ -19,38 +19,37 @@ export class UsuarioComponent implements OnInit {
     private routes: ActivatedRoute,
   ) {}
   filtro: any;
-  id_empr: any;
-  usuario: any;
+  medico: any;
   login_data: any;
   forma!: FormGroup;
-  agregar: boolean = false;
+
   ngOnInit(): void {
     this.login_data = this.encryp.decryptData(localStorage.getItem('meta'));
-    this.getusuario();
+    this.getmedico();
   }
-  addusuario(usuario: any) {
+
+  addmedico() {
     this.route.navigate([
-      '/dashboard/usuario',
-      this.encryp.encryptData(JSON.stringify(usuario)),
-    ]);
-  }
-  editusuario(usuario: any) {
-    this.route.navigate([
-      '/dashboard/usuario',
-      this.encryp.encryptData(JSON.stringify(usuario)),
+      '/dashboard/medicos',
+      this.encryp.encryptData(JSON.stringify('add')),
     ]);
   }
 
-  getusuario() {
+  editmedico(medico: any) {
+    this.route.navigate([
+      '/dashboard/medicos',
+      this.encryp.encryptData(JSON.stringify(medico)),
+    ]);
+  }
+
+  getmedico() {
     let datos = {
-      codigousuario: this.login_data.usuario,
       jwt: this.login_data.jwt,
     };
-    this.serv.consultas(datos, 'usuarios/listall.php').subscribe(
+    this.serv.consultas(datos, 'medicos/listall.php').subscribe(
       (resp: any) => {
         if (resp.status) {
-          this.usuario = resp.data;
-          console.log(this.usuario);
+          this.medico = resp.data;
         } else {
           return;
         }
@@ -61,48 +60,31 @@ export class UsuarioComponent implements OnInit {
     );
   }
 
-  Estadousuario(forma: any, estado: any) {
-    let est = '';
-
-    if (estado === '0') {
-      est = 'inactivar';
-    }
-    if (estado === '1') {
-      est = 'activar';
-    }
+  Estadomedico(forma: any, estado: any) {
+    const est = estado === 1 ? 'activar' : 'inactivar';
 
     Swal.fire({
       icon: 'warning',
-      text: `Seguro que desea ${est} esta usuario?`,
+      text: `Seguro que desea ${est} este médico?`,
       showCancelButton: true,
       confirmButtonText: 'Ok',
     }).then((result) => {
       if (result.isConfirmed) {
-        let datos: any = {};
         let dato: any = {};
-        dato['id_usuario'] = forma.id_usuario;
+        dato['id_medico'] = forma.id_medico;
         dato['activo'] = estado;
         dato['jwt'] = this.login_data.jwt;
-        datos = JSON.stringify(dato);
-        console.log(datos);
 
         try {
           this.serv
-            .consultass(datos, 'usuarios/estado.php')
+            .consultass(JSON.stringify(dato), 'medicos/estado.php')
             .then((resp: any) => {
-              Swal.fire({
-                icon: 'success',
-                text: 'Done!',
-                confirmButtonText: 'Ok',
-              }).then((rep) => {
-                this.ngOnInit();
-              });
+              Swal.fire({ icon: 'success', text: 'Done!', confirmButtonText: 'Ok' })
+                .then(() => this.ngOnInit());
             });
         } catch (e) {
           console.log(e);
         }
-      } else if (result.isDismissed) {
-        null;
       }
     });
   }

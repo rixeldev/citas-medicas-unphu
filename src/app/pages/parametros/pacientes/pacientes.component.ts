@@ -4,14 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { EncdescService } from 'src/app/services/encdesc.service';
 import Swal from 'sweetalert2';
-import { Chart, ChartType } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-pacientes',
+  templateUrl: './pacientes.component.html',
+  styleUrls: ['./pacientes.component.css'],
 })
-export class DashboardComponent {
+export class PacientesComponent implements OnInit {
   constructor(
     private encryp: EncdescService,
     private fb: FormBuilder,
@@ -21,43 +20,37 @@ export class DashboardComponent {
   ) {}
   filtro: any;
   id_empr: any;
-  reservaciones: any;
+  paciente: any;
   login_data: any;
   forma!: FormGroup;
-
-  cantidadcitas;
-  cantidadpacientes;
-  cantidadmedicosactivos;
-  cantidadcitasvencidas;
-
-  tblcitas;
-
+  agregar: boolean = false;
   ngOnInit(): void {
     this.login_data = this.encryp.decryptData(localStorage.getItem('meta'));
-    this.getreservaciones();
+    this.getpaciente();
   }
-
-  editdash(rutas: any) {
+  addpaciente(paciente: any) {
     this.route.navigate([
-      '/dashboard/verfactura',
-      this.encryp.encryptData(JSON.stringify(rutas)),
+      '/dashboard/pacientes',
+      this.encryp.encryptData(JSON.stringify(paciente)),
+    ]);
+  }
+  editpaciente(paciente: any) {
+    this.route.navigate([
+      '/dashboard/pacientes',
+      this.encryp.encryptData(JSON.stringify(paciente)),
     ]);
   }
 
-  getreservaciones() {
+  getpaciente() {
     let datos = {
-      codigousuario: this.login_data.usuario,
-      jwt: '1',
+      codigopaciente: this.login_data.paciente,
+      jwt: this.login_data.jwt,
     };
-    this.serv.consultas(datos, 'dashboard/listall.php').subscribe(
+    this.serv.consultas(datos, 'pacientes/listall.php').subscribe(
       (resp: any) => {
         if (resp.status) {
-          console.log(resp);
-          this.cantidadcitas = resp.cantidadcitas;
-          this.cantidadpacientes = resp.cantidadpacientes;
-          this.cantidadmedicosactivos = resp.cantidadmedicosactivos;
-          this.cantidadcitasvencidas = resp.cantidadcitasvencidas;
-          this.tblcitas = resp.tblcitas;
+          this.paciente = resp.data;
+          console.log(this.paciente);
         } else {
           return;
         }
@@ -68,34 +61,33 @@ export class DashboardComponent {
     );
   }
 
-  Estadousuario(forma: any, estado: any) {
+  Estadopaciente(forma: any, estado: any) {
     let est = '';
 
-    if (estado === '0') {
+    if (estado === 0) {
       est = 'inactivar';
     }
-    if (estado === '1') {
+    if (estado === 1) {
       est = 'activar';
     }
 
     Swal.fire({
       icon: 'warning',
-      text: `Seguro que desea ${est} esta usuario?`,
+      text: `Seguro que desea ${est} esta paciente?`,
       showCancelButton: true,
       confirmButtonText: 'Ok',
     }).then((result) => {
       if (result.isConfirmed) {
         let datos: any = {};
         let dato: any = {};
-        dato['id_usuario'] = forma.id_usuario;
+        dato['id_paciente'] = forma.id_paciente;
         dato['activo'] = estado;
         dato['jwt'] = this.login_data.jwt;
         datos = JSON.stringify(dato);
-        console.log(datos);
 
         try {
           this.serv
-            .consultass(datos, 'usuarios/estado.php')
+            .consultass(datos, 'pacientes/estado.php')
             .then((resp: any) => {
               Swal.fire({
                 icon: 'success',

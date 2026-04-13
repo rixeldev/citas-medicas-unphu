@@ -114,7 +114,7 @@ export class DataService {
 
   consultas(datos: any, metodo: string) {
     return this.httpClient.post(
-      `${this.REST_API}/${metodo}`,
+      `${this.REST_API}${metodo}`,
       datos
     ).pipe(
       map(resp => {

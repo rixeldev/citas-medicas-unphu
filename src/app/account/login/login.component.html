@@ -12,26 +12,31 @@
                 <p class="login-box-msg">Inicia sesión</p>
 
                 <form autocomplete="off" [formGroup]="forma" (ngSubmit)="login()">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 d-flex flex-column">
+                      <div class="d-flex flex-row">
                         <input type="text" formControlName="codusuario" [class.is-invalid]="usuarioNoValido" class="form-control" placeholder="Usuario">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
-                            <small *ngIf="usuarioNoValido" class="text-danger"><i
-                          class="fafa-exclamation-triangle"></i>El
-                      usuario es Requerido</small>
+                          </div>
                         </div>
+
+                          <small *ngIf="usuarioNoValido" class="text-danger"><i
+                        class="fafa-exclamation-triangle"></i>El
+                    usuario es Requerido</small>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 d-flex flex-column">
+                      <div class="d-flex flex-row">
                         <input type="password" class="form-control" placeholder="Contraseña" formControlName="codclave" [class.is-invalid]="claveNoValido">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
-                            <small *ngIf="claveNoValido" class="text-danger"><i class="fa
-                    fa-exclamation-triangle"></i>La Contraseña es Requerida</small>
+                          </div>
                         </div>
+                        <small *ngIf="claveNoValido" class="text-danger"><i class="fa
+                    fa-exclamation-triangle"></i>La Contraseña es Requerida</small>
                     </div>
                     <div class="row">
                         <div class="col-8">

@@ -9,24 +9,33 @@ import { RouterModule } from '@angular/router';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
-
 import { UsuarioComponent } from '../pages/parametros/usuario/usuario.component';
 
-
-
 import { AddusuarioComponent } from './parametros/addusuario/addusuario.component';
-
-
+import { PacientesComponent } from './parametros/pacientes/pacientes.component';
+import { AddpacienteComponent } from './parametros/addpaciente/addpaciente.component';
+import { CitasComponent } from './parametros/citas/citas.component';
+import { MedicosComponent } from './parametros/medicos/medicos.component';
+import { AddmedicoComponent } from './parametros/addmedico/addmedico.component';
+import { RepusuariosComponent } from './parametros/repusuarios/repusuarios.component';
+import { AddcitasComponent } from './parametros/addcitas/addcitas.component';
+import { RepcitasComponent } from './parametros/repcitas/repcitas.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     FilterPipe,
     NotImagePipe,
-UsuarioComponent,
-AddusuarioComponent,
-
+    UsuarioComponent,
+    AddusuarioComponent,
+    PacientesComponent,
+    AddpacienteComponent,
+    CitasComponent,
+    MedicosComponent,
+    AddmedicoComponent,
+    RepusuariosComponent,
+    AddcitasComponent,
+    RepcitasComponent,
   ],
   imports: [
     CommonModule,
@@ -34,8 +43,7 @@ AddusuarioComponent,
     NgSelectModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
-
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}

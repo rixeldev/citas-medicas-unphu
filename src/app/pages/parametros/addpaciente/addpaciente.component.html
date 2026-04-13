@@ -1,0 +1,180 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Agregar o Editar Paciente</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <form [formGroup]="forma" (ngSubmit)="guardar()">
+                    <div class="card card-primary">
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Información Personal</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="numero_expediente">Nro Expediente</label>
+                                    <input type="text" name="numero_expediente" formControlName="numero_expediente" class="form-control" id="numero_expediente" placeholder="Opcional">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" name="nombre" [class.is-invalid]="nombreNoValido" formControlName="nombre" class="form-control" id="nombre" placeholder="Nombre">
+                                    <small *ngIf="nombreNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="apellido_paterno">Apellido Paterno</label>
+                                    <input type="text" name="apellido_paterno" [class.is-invalid]="apellidoNoValido" formControlName="apellido_paterno" class="form-control" id="apellido_paterno" placeholder="Apellido Paterno">
+                                    <small *ngIf="apellidoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="apellido_materno">Apellido Materno</label>
+                                    <input type="text" name="apellido_materno" formControlName="apellido_materno" class="form-control" id="apellido_materno" placeholder="Apellido Materno">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                                    <input type="date" name="fecha_nacimiento" [class.is-invalid]="fechaNacimientoNoValido" formControlName="fecha_nacimiento" class="form-control" id="fecha_nacimiento">
+                                    <small *ngIf="fechaNacimientoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="genero">Género</label>
+                                    <select name="genero" formControlName="genero" class="form-control" id="genero" [class.is-invalid]="generoNoValido">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <small *ngIf="generoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="tipo_documento">Tipo Documento</label>
+                                    <select name="tipo_documento" formControlName="tipo_documento" class="form-control" id="tipo_documento" [class.is-invalid]="tipoDocumentoNoValido">
+                                        <option value="Cedula">Cédula</option>
+                                        <option value="Pasaporte">Pasaporte</option>
+                                        <option value="Carnet">Carnet</option>
+                                    </select>
+                                    <small *ngIf="tipoDocumentoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="numero_documento">Nro Documento</label>
+                                    <input type="text" name="numero_documento" [class.is-invalid]="documentoNoValido" formControlName="numero_documento" class="form-control" id="numero_documento" placeholder="Número">
+                                    <small *ngIf="documentoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Contacto y Dirección</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="telefono_principal">Teléfono Principal</label>
+                                    <input type="text" name="telefono_principal" [class.is-invalid]="telefonoNoValido" formControlName="telefono_principal" class="form-control" id="telefono_principal" placeholder="Principal">
+                                    <small *ngIf="telefonoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="telefono_secundario">Teléfono Sec.</label>
+                                    <input type="text" name="telefono_secundario" formControlName="telefono_secundario" class="form-control" id="telefono_secundario" placeholder="Secundario">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" formControlName="email" class="form-control" id="email" placeholder="Correo electrónico">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="direccion">Dirección</label>
+                                    <input type="text" name="direccion" formControlName="direccion" class="form-control" id="direccion" placeholder="Dirección completa">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="ciudad">Ciudad</label>
+                                    <input type="text" name="ciudad" formControlName="ciudad" class="form-control" id="ciudad" placeholder="Ciudad">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="provincia">Provincia</label>
+                                    <input type="text" name="provincia" formControlName="provincia" class="form-control" id="provincia" placeholder="Provincia">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="codigo_postal">Cod. Postal</label>
+                                    <input type="text" name="codigo_postal" formControlName="codigo_postal" class="form-control" id="codigo_postal" placeholder="C.P.">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Información Médica</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2 form-group">
+                                    <label for="tipo_sangre">T. Sangre</label>
+                                    <input type="text" name="tipo_sangre" formControlName="tipo_sangre" class="form-control" id="tipo_sangre" placeholder="Ej: O+">
+                                </div>
+                                <div class="col-md-5 form-group">
+                                    <label for="alergias">Alergias</label>
+                                    <textarea name="alergias" formControlName="alergias" class="form-control" id="alergias" rows="2" placeholder="Describa alergias..."></textarea>
+                                </div>
+                                <div class="col-md-5 form-group">
+                                    <label for="condiciones_medicas">Condiciones</label>
+                                    <textarea name="condiciones_medicas" formControlName="condiciones_medicas" class="form-control" id="condiciones_medicas" rows="2" placeholder="Condiciones médicas importantes..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Contacto de Emergencia</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="contacto_emergencia_nombre">Nombre Contacto</label>
+                                    <input type="text" name="contacto_emergencia_nombre" formControlName="contacto_emergencia_nombre" class="form-control" id="contacto_emergencia_nombre" placeholder="Nombre completo">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="contacto_emergencia_telefono">Tel. Contacto</label>
+                                    <input type="text" name="contacto_emergencia_telefono" formControlName="contacto_emergencia_telefono" class="form-control" id="contacto_emergencia_telefono" placeholder="Teléfono">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="contacto_emergencia_relacion">Relación</label>
+                                    <input type="text" name="contacto_emergencia_relacion" formControlName="contacto_emergencia_relacion" class="form-control" id="contacto_emergencia_relacion" placeholder="Parentesco">
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="activo">Estado del Paciente</label>
+                                    <select formControlName="activo" name="activo" id="activo" [class.is-invalid]="activoNoValido" class="form-control">
+                                        <option [ngValue]="1">Activo</option>
+                                        <option [ngValue]="0">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="col text-right">
+                                <button routerLink="/dashboard/pacientes" type="button" class="btn btn-secondary mr-2 mb-1 waves-effect waves-light">
+                                    <i class="fa fa-window-close"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-info mb-1 waves-effect waves-light">
+                                    <i class="fa fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,90 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-8">
+                <h1>Citas Médicas</h1>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><li class="fa fa-search"></li></span>
+                            </div>
+                            <input type="search" [(ngModel)]="filtro" placeholder="Filtrar por número de cita" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 text-left">
+                        <br>
+                        <button (click)="addcita()" type="button" [tooltip]="'Agregar'" class="btn btn-info mr-1 mb-1 waves-effect waves-light">
+                            <li class="fa fa-plus"></li> Nueva Cita
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive">
+                        <table id="table-citas" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nro. Cita</th>
+                                    <th>Paciente ID</th>
+                                    <th>Médico ID</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha</th>
+                                    <th>Hora Inicio</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                    <th class="text-right">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of citas | filter:'numero_cita':filtro">
+                                    <td>{{ item.numero_cita || item.id_cita }}</td>
+                                    <td>{{ item.id_paciente }}</td>
+                                    <td>{{ item.id_medico }}</td>
+                                    <td>{{ item.id_especialidad }}</td>
+                                    <td>{{ item.fecha_cita }}</td>
+                                    <td>{{ item.hora_inicio }}</td>
+                                    <td>{{ item.tipo_cita }}</td>
+                                    <td>
+                                        <span class="badge" [ngStyle]="{'background-color': item.id_estado == 1 ? '#28a745' : item.id_estado == 3 ? '#dc3545' : '#ffc107', 'color': 'white'}">
+                                            Estado {{ item.id_estado }}
+                                        </span>
+                                    </td>
+                                    <td class="text-right">
+                                        <button (click)="editcita(item)" [tooltip]="'Editar'" class="btn btn-icon btn-info mr-1 mb-1 waves-effect waves-light">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nro. Cita</th>
+                                    <th>Paciente ID</th>
+                                    <th>Médico ID</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha</th>
+                                    <th>Hora Inicio</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                    <th class="text-right">Opciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

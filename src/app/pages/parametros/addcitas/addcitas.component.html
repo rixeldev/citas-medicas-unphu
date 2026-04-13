@@ -1,0 +1,165 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6"><h1>Agregar / Editar Cita Médica</h1></div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <form [formGroup]="forma" (ngSubmit)="guardar()">
+
+                    <!-- Partes involucradas -->
+                    <div class="card card-primary">
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color:aliceblue;">Participantes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="id_paciente">Paciente</label>
+                                    <select formControlName="id_paciente" id="id_paciente" class="form-control" [class.is-invalid]="pacienteNoValido">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let p of pacientes" [value]="p.id_paciente">
+                                            {{ p.nombre }} {{ p.apellido_paterno }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="pacienteNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="id_medico">Médico</label>
+                                    <select formControlName="id_medico" id="id_medico" class="form-control" [class.is-invalid]="medicoNoValido">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let m of medicos" [value]="m.id_medico">
+                                            {{ m.nombre }} {{ m.apellido_paterno }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="medicoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="id_especialidad">Especialidad</label>
+                                    <select formControlName="id_especialidad" id="id_especialidad" class="form-control" [class.is-invalid]="especialidadNoValido">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let e of especialidades" [value]="e.id_especialidad">
+                                            {{ e.nombre_especialidad }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="especialidadNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Programación -->
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color:aliceblue;">Programación</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="fecha_cita">Fecha de Cita</label>
+                                    <input type="date" formControlName="fecha_cita" id="fecha_cita" class="form-control" [class.is-invalid]="fechaNoValido">
+                                    <small *ngIf="fechaNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="hora_inicio">Hora Inicio</label>
+                                    <input type="time" formControlName="hora_inicio" id="hora_inicio" class="form-control" [class.is-invalid]="horaNoValido">
+                                    <small *ngIf="horaNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="hora_fin">Hora Fin</label>
+                                    <input type="time" formControlName="hora_fin" id="hora_fin" class="form-control">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="duracion_minutos">Duración (min.)</label>
+                                    <input type="number" formControlName="duracion_minutos" id="duracion_minutos" class="form-control" min="5">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="fecha_confirmacion">F. Confirmación</label>
+                                    <input type="date" formControlName="fecha_confirmacion" id="fecha_confirmacion" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detalles -->
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color:aliceblue;">Detalles</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="id_motivo">Motivo de Consulta</label>
+                                    <select formControlName="id_motivo" id="id_motivo" class="form-control" [class.is-invalid]="motivoNoValido">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let mt of motivos" [value]="mt.id_motivo">
+                                            {{ mt.nombre_motivo }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="motivoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="id_estado">Estado</label>
+                                    <select formControlName="id_estado" id="id_estado" class="form-control" [class.is-invalid]="estadoNoValido">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let est of estados" [value]="est.id_estado">
+                                            {{ est.nombre_estado }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="estadoNoValido" class="form-text text-danger"><i class="fa fa-exclamation-triangle"></i> Requerido</small>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="tipo_cita">Tipo de Cita</label>
+                                    <select formControlName="tipo_cita" id="tipo_cita" class="form-control" [class.is-invalid]="tipoCitaNoValido">
+                                        <option value="Presencial">Presencial</option>
+                                        <option value="Virtual">Virtual</option>
+                                        <option value="Telefonica">Telefónica</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="es_primera_vez">¿Primera Vez?</label>
+                                    <select formControlName="es_primera_vez" id="es_primera_vez" class="form-control">
+                                        <option [ngValue]="1">Sí</option>
+                                        <option [ngValue]="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="consultorio">Consultorio</label>
+                                    <input type="text" formControlName="consultorio" id="consultorio" class="form-control" placeholder="Número o ubicación del consultorio">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="numero_cita">Número de Cita</label>
+                                    <input type="text" formControlName="numero_cita" id="numero_cita" class="form-control" placeholder="Auto-generado si vacío">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="observaciones">Observaciones</label>
+                                    <textarea formControlName="observaciones" id="observaciones" class="form-control" rows="3" placeholder="Observaciones generales..."></textarea>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="notas_medicas">Notas Médicas</label>
+                                    <textarea formControlName="notas_medicas" id="notas_medicas" class="form-control" rows="3" placeholder="Notas del médico..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="col text-right">
+                                <button routerLink="/dashboard/citas" type="button" class="btn btn-secondary mr-2 mb-1 waves-effect waves-light">
+                                    <i class="fa fa-window-close"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-info mb-1 waves-effect waves-light">
+                                    <i class="fa fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

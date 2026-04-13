@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-8">
-                <h1>Usuarios</h1>
+                <h1>Pacientes</h1>
             </div>
             <div class="col-sm-8">
                 <div class="row">
@@ -14,14 +14,14 @@
                                     <li class="fa fa-search"></li>
                                 </span>
                             </div>
-                            <input type="search" [(ngModel)]="filtro" placeholder="Filtrar usuario" class="form-control">
+                            <input type="search" [(ngModel)]="filtro" placeholder="Filtrar Nombre del pacientes" class="form-control">
                         </div>
 
                     </div>
                     <div  class="col-sm-4 text-letf">
                         <br>
 
-                        <button (click)=" addusuario( 'add' ) " type="button" [tooltip]="'Agregar'" class="btn btn-info mr-1 mb-1 waves-effect waves-light"> <li class="fa fa-plus"></li>Agregar </button>
+                        <button (click)=" addpaciente( 'add' ) " type="button" [tooltip]="'Agregar'" class="btn btn-info mr-1 mb-1 waves-effect waves-light"> <li class="fa fa-plus"></li>Agregar </button>
                     </div>
                 </div>
             </div>
@@ -42,18 +42,21 @@
 
        <th>Código </th>
        <th>Nombre </th>
-       <th>Usuario </th>
+       <th>Apellido </th>
+       <th>Cedula </th>
+
                                     <th>Estado</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of usuario | filter:'Nombre':filtro">
+                                <tr *ngFor="let item of paciente | filter:'nombre':filtro">
 
 
-        <td>{{item.id_usuario }}</td>
-        <td>{{item.nombre_completo }}</td>
-        <td>{{item.nombre_usuario }}</td>
+        <td>{{item.id_paciente }}</td>
+        <td>{{item.nombre }} </td>
+        <td>{{item.apellido_paterno }}</td>
+        <td>{{item.numero_documento }}</td>
                                     <td>
                                         <div class="chip chip-success mr-1 text-center">
                                             <div class=" chip-body ">
@@ -65,13 +68,13 @@
                                     </td>
                                     <td class=" text-right ">
 
-                                        <button (click)=" editusuario(item) " [tooltip]=" 'Editar' " class=" btn btn-icon btn-info mr-1 mb-1 waves-effect waves-light ">
+                                        <button (click)=" editpaciente(item) " [tooltip]=" 'Editar' " class=" btn btn-icon btn-info mr-1 mb-1 waves-effect waves-light ">
                                             <i class=" fas fa-pencil-alt "></i>
                                         </button>
 
-                                        <a *ngIf=" item.activo===0 " [tooltip]=" 'Activar' " type=" button " (click)=" Estadousuario(item, 1 ) " class=" btn btn-icon btn-success mr-1 mb-1 waves-effect waves-light "><i
+                                        <a *ngIf=" item.activo===0 " [tooltip]=" 'Activar' " type=" button " (click)=" Estadopaciente(item, 1 ) " class=" btn btn-icon btn-success mr-1 mb-1 waves-effect waves-light "><i
                                                 class=" fa fa-check-circle " style=" color:white "></i></a>
-                                        <a *ngIf=" item.activo===1 " [tooltip]=" 'Inactivar' " type=" button " (click)=" Estadousuario(item, 0 ) " class=" btn btn-icon btn-danger mr-1 mb-1 waves-effect waves-light "><i
+                                        <a *ngIf=" item.activo===1 " [tooltip]=" 'Inactivar' " type=" button " (click)=" Estadopaciente(item, 0 ) " class=" btn btn-icon btn-danger mr-1 mb-1 waves-effect waves-light "><i
                                                 class=" fa fa-trash " style=" color:white "></i></a>
                                     </td>
                                 </tr>
@@ -80,9 +83,10 @@
                             <tfoot>
                                 <tr>
 
-       <th>Código </th>
-       <th>Nombre </th>
-       <th>Usuario </th>
+                                    <th>Código </th>
+                                    <th>Nombre </th>
+                                    <th>Apellido </th>
+                                    <th>Cedula </th>
                                     <th>Estado</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>

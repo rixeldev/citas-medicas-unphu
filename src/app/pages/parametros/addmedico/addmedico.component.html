@@ -1,0 +1,185 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Agregar o Editar Médico</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <form [formGroup]="forma" (ngSubmit)="guardar()">
+
+                    <!-- Cuenta de Usuario (solo al agregar) -->
+                    <div class="card card-primary" *ngIf="id === 'add'">
+                        <div class="card-header" style="background-color: #1a6b3a;">
+                            <h3 class="card-title" style="color: aliceblue;">Cuenta de Acceso (Usuario)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="nombre_completo">Nombre Completo</label>
+                                    <input type="text" formControlName="nombre_completo"
+                                        class="form-control" id="nombre_completo" placeholder="Nombre completo del médico">
+                                    <small *ngIf="forma.get('nombre_completo')!.invalid && forma.get('nombre_completo')!.touched" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="nombre_usuario">Usuario (Login)</label>
+                                    <input type="text" formControlName="nombre_usuario"
+                                        class="form-control" id="nombre_usuario" placeholder="Usuario de acceso">
+                                    <small *ngIf="forma.get('nombre_usuario')!.invalid && forma.get('nombre_usuario')!.touched" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="password_hash">Clave</label>
+                                    <input type="password" formControlName="password_hash"
+                                        class="form-control" id="password_hash" placeholder="Contraseña">
+                                    <small *ngIf="forma.get('password_hash')!.invalid && forma.get('password_hash')!.touched" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Personal -->
+                    <div class="card card-primary">
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Información Personal</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" formControlName="nombre" [class.is-invalid]="nombreNoValido"
+                                        class="form-control" id="nombre" placeholder="Nombre">
+                                    <small *ngIf="nombreNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="apellido_paterno">Apellido Paterno</label>
+                                    <input type="text" formControlName="apellido_paterno" [class.is-invalid]="apellidoNoValido"
+                                        class="form-control" id="apellido_paterno" placeholder="Apellido Paterno">
+                                    <small *ngIf="apellidoNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="apellido_materno">Apellido Materno</label>
+                                    <input type="text" formControlName="apellido_materno"
+                                        class="form-control" id="apellido_materno" placeholder="Apellido Materno">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información Profesional -->
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Información Profesional</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="id_especialidad">Especialidad</label>
+                                    <select formControlName="id_especialidad" [class.is-invalid]="especialidadNoValido"
+                                        class="form-control" id="id_especialidad">
+                                        <option value="">-- Seleccione --</option>
+                                        <option *ngFor="let esp of especialidades" [value]="esp.id_especialidad">
+                                            {{ esp.nombre_especialidad }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="especialidadNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="numero_licencia">Número de Licencia</label>
+                                    <input type="text" formControlName="numero_licencia" [class.is-invalid]="licenciaNoValido"
+                                        class="form-control" id="numero_licencia" placeholder="Nro. Licencia">
+                                    <small *ngIf="licenciaNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="anos_experiencia">Años Exp.</label>
+                                    <input type="number" formControlName="anos_experiencia"
+                                        class="form-control" id="anos_experiencia" placeholder="0" min="0">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="fecha_contratacion">F. Contratación</label>
+                                    <input type="date" formControlName="fecha_contratacion" [class.is-invalid]="fechaNoValido"
+                                        class="form-control" id="fecha_contratacion">
+                                    <small *ngIf="fechaNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label for="consultorio">Consultorio</label>
+                                    <input type="text" formControlName="consultorio"
+                                        class="form-control" id="consultorio" placeholder="Ubicación del consultorio">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label for="biografia">Biografía</label>
+                                    <textarea formControlName="biografia" class="form-control" id="biografia"
+                                        rows="3" placeholder="Breve descripción del médico..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contacto -->
+                        <div class="card-header" style="background-color: #0069d9;">
+                            <h3 class="card-title" style="color: aliceblue;">Contacto</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="text" formControlName="telefono" [class.is-invalid]="telefonoNoValido"
+                                        class="form-control" id="telefono" placeholder="Teléfono">
+                                    <small *ngIf="telefonoNoValido" class="form-text text-danger">
+                                        <i class="fa fa-exclamation-triangle"></i> Requerido
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" formControlName="email"
+                                        class="form-control" id="email" placeholder="Correo electrónico">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="activo">Estado</label>
+                                    <select formControlName="activo" id="activo" class="form-control">
+                                        <option [ngValue]="1">Activo</option>
+                                        <option [ngValue]="0">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="col text-right">
+                                <button routerLink="/dashboard/medicos" type="button"
+                                    class="btn btn-secondary mr-2 mb-1 waves-effect waves-light">
+                                    <i class="fa fa-window-close"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-info mb-1 waves-effect waves-light">
+                                    <i class="fa fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
