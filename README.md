@@ -1,27 +1,83 @@
-# Rentcar
+# Sistema de Gestión de Citas Médicas - UNPHU 🏥
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+¡Bienvenido al **Sistema de Gestión de Citas Médicas UNPHU**! Esta es una plataforma integral diseñada para optimizar la administración de pacientes, médicos y citas médicas de manera eficiente y moderna.
 
-## Development server
+El sistema cuenta con una arquitectura robusta, una interfaz de usuario premium y seguridad avanzada mediante JWT.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## ✨ Características Principales
 
-## Code scaffolding
+*   **Módulo de Médicos**: Gestión completa de personal médico vinculado a cuentas de usuario.
+*   **Módulo de Pacientes**: Registro y administración detallada de pacientes.
+*   **Gestión de Citas**: Proceso completo de creación, edición y seguimiento de citas médicas.
+*   **Recepción y Despacho**: Panel operativo para la gestión en tiempo real del flujo de pacientes y estados de cita.
+*   **Seguridad Proactiva**: Sistema de protección contra sesiones expiradas y middleware de autenticación (JWT).
+*   **Interfaz Moderna**: Diseño limpio, responsivo y profesional basado en las mejores prácticas de UX/UI.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🚀 Guía de Instalación y Uso
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 📋 Requisitos Previos
 
-## Running unit tests
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+1.  **Node.js** (Versión 16 o superior recomendada).
+2.  **Angular CLI** (`npm install -g @angular/cli`).
+3.  **Servidor Web (XAMPP/WAMP)**: El backend requiere de PHP y MySQL.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 📥 Clonación del Proyecto
 
-## Running end-to-end tests
+1.  Abre tu terminal y clona el repositorio:
+    ```bash
+    git clone [URL-DEL-REPOSITORIO]
+    ```
+2.  Entra en la carpeta del proyecto:
+    ```bash
+    cd citas-medicas-unphu
+    ```
+3.  Instala las dependencias necesarias:
+    ```bash
+    npm install
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### ⚙️ Configuración del Backend
 
-## Further help
+El sistema depende de una API en PHP. Asegúrate de que los archivos del backend estén ubicados en:
+`C:\xampp\htdocs\projects\citas_medicas`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Verifica que tu base de datos MySQL esté corriendo y que la base de datos `citas_medicas` esté importada.
+
+### 🏃 Ejecución del Sistema
+
+Para iniciar el servidor de desarrollo de Angular, ejecuta:
+```bash
+npm start
+```
+O simplemente:
+```bash
+ng serve
+```
+
+Una vez iniciado, abre tu navegador en: `http://localhost:4200`
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+*   **Frontend**: Angular 16+, TypeScript, Bootstrap 5.
+*   **Backend**: PHP (REST API).
+*   **Base de Datos**: MySQL.
+*   **Estilos**: CSS3 Moderno con Glassmorphism y animaciones personalizadas.
+*   **Librerías**: SweetAlert2, FontAwesome, CryptoJS.
+
+---
+
+## ❤️ Feedback y Agradecimientos
+
+Agradecemos enormemente tu interés en este sistema. Ha sido desarrollado con un enfoque centrado en el usuario para garantizar que la gestión médica sea lo más fluida posible.
+
+Si tienes comentarios, sugerencias o encuentras algún problema, ¡no dudes en comunicarlo! Tu feedback es vital para seguir mejorando y ofreciendo la mejor experiencia tecnológica en el sector salud.
+
+**¡Esperamos que disfrutes usando el sistema tanto como nosotros disfrutamos construyéndolo!** 🌟
+
+---
+*Desarrollado con ❤️ por [RixelDev](https://rixel.dev) con fines educativos para la UNPHU - Facultad de Ciencias y Tecnología.*
