@@ -20,6 +20,7 @@ import { AddmedicoComponent } from './parametros/addmedico/addmedico.component';
 import { RepusuariosComponent } from './parametros/repusuarios/repusuarios.component';
 import { AddcitasComponent } from './parametros/addcitas/addcitas.component';
 import { RepcitasComponent } from './parametros/repcitas/repcitas.component';
+import { DespachoComponent } from './parametros/despacho/despacho.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RepcitasComponent } from './parametros/repcitas/repcitas.component';
     RepusuariosComponent,
     AddcitasComponent,
     RepcitasComponent,
+    DespachoComponent,
   ],
   imports: [
     CommonModule,

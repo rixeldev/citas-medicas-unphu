@@ -85,24 +85,29 @@ export class NavbarComponent implements OnInit {
       if (this.tipo_usuario == 2) {
         this.menu_adm_param = [
           {
-            name: 'producto',
-            url: '/dashboard/producto',
+            name: 'Pacientes',
+            url: '/dashboard/pacientes',
             icono: 'nav-icon fas fa-book',
           },
         ];
 
         this.menu_adm_proceso = [
           {
-            name: 'Agenda',
-            url: '/dashboard/agenda',
+            name: 'Citas',
+            url: '/dashboard/citas',
+            icono: 'nav-icon fas fa-th',
+          },
+          {
+            name: 'Recepción Despacho',
+            url: '/dashboard/despacho',
             icono: 'nav-icon fas fa-th',
           },
         ];
 
         this.menu_adm_reporte = [
           {
-            name: 'Reporte de producto',
-            url: '/dashboard/repproducto',
+            name: 'Citas',
+            url: '/dashboard/repcitas',
             icono: 'nav-icon fas fa-file',
           },
         ];

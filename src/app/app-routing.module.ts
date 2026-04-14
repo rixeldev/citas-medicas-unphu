@@ -17,10 +17,14 @@ import { AddmedicoComponent } from './pages/parametros/addmedico/addmedico.compo
 import { RepusuariosComponent } from './pages/parametros/repusuarios/repusuarios.component';
 import { AddcitasComponent } from './pages/parametros/addcitas/addcitas.component';
 import { RepcitasComponent } from './pages/parametros/repcitas/repcitas.component';
+import { DespachoComponent } from './pages/parametros/despacho/despacho.component';
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   {
     path: 'dashboard',
     component: NavbarComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dash', component: DashboardComponent },
       { path: 'usuario', component: UsuarioComponent },
@@ -31,6 +35,7 @@ const routes: Routes = [
       { path: 'medicos/:id', component: AddmedicoComponent },
       { path: 'citas', component: CitasComponent },
       { path: 'citas/:id', component: AddcitasComponent },
+      { path: 'despacho', component: DespachoComponent },
       { path: 'repusuario', component: RepusuariosComponent },
       { path: 'repcitas', component: RepcitasComponent },
     ],

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   forma!: FormGroup;
   tipo_art!: string;
   loginlogo: string = environment.logo_login;
+  currentYear: number = new Date().getFullYear();
   constructor(private rutaActiva: ActivatedRoute, private serv: DataService, 
    private encrp: EncdescService, private route: Router, private fb: FormBuilder) {
     this.crearFormulario();

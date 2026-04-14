@@ -1,0 +1,90 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Recepción Despacho</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Listado de Citas Pendientes y Gestión</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 250px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar paciente o médico..." [(ngModel)]="filtro">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th (click)="setOrderBy('numero_cita')" style="cursor: pointer;">
+                                Nro. Cita <i class="fas" [ngClass]="{'fa-sort-up': sortKey === 'numero_cita' && !sortReverse, 'fa-sort-down': sortKey === 'numero_cita' && sortReverse, 'fa-sort': sortKey !== 'numero_cita'}"></i>
+                            </th>
+                            <th (click)="setOrderBy('fecha_cita')" style="cursor: pointer;">
+                                Fecha <i class="fas" [ngClass]="{'fa-sort-up': sortKey === 'fecha_cita' && !sortReverse, 'fa-sort-down': sortKey === 'fecha_cita' && sortReverse, 'fa-sort': sortKey !== 'fecha_cita'}"></i>
+                            </th>
+                            <th (click)="setOrderBy('hora_inicio')" style="cursor: pointer;">
+                                Hora <i class="fas" [ngClass]="{'fa-sort-up': sortKey === 'hora_inicio' && !sortReverse, 'fa-sort-down': sortKey === 'hora_inicio' && sortReverse, 'fa-sort': sortKey !== 'hora_inicio'}"></i>
+                            </th>
+                            <th (click)="setOrderBy('nombre_paciente')" style="cursor: pointer;">
+                                Paciente <i class="fas" [ngClass]="{'fa-sort-up': sortKey === 'nombre_paciente' && !sortReverse, 'fa-sort-down': sortKey === 'nombre_paciente' && sortReverse, 'fa-sort': sortKey !== 'nombre_paciente'}"></i>
+                            </th>
+                            <th (click)="setOrderBy('nombre_medico')" style="cursor: pointer;">
+                                Médico <i class="fas" [ngClass]="{'fa-sort-up': sortKey === 'nombre_medico' && !sortReverse, 'fa-sort-down': sortKey === 'nombre_medico' && sortReverse, 'fa-sort': sortKey !== 'nombre_medico'}"></i>
+                            </th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cita of citas | filter:'nombre_paciente':filtro">
+                            <td>{{cita.numero_cita || cita.id_cita}}</td>
+                            <td>{{cita.fecha_cita | date:'dd/MM/yyyy'}}</td>
+                            <td>{{cita.hora_inicio}}</td>
+                            <td><strong>{{cita.nombre_paciente}}</strong></td>
+                            <td>{{cita.nombre_medico}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm" [style.background-color]="cita.color_hex || '#ccc'" style="color: white; font-weight: bold;">
+                                        {{cita.nombre_estado}}
+                                    </button>
+                                    <button type="button" class="btn btn-sm dropdown-toggle dropdown-icon" [style.background-color]="cita.color_hex || '#ccc'" style="color: white;" data-toggle="dropdown">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        <a class="dropdown-item" *ngFor="let est of estados" (click)="cambiarEstado(cita, est.id_estado)" style="cursor: pointer;">
+                                            <i class="fas fa-circle" [style.color]="est.color_hex"></i> {{est.nombre_estado}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm mr-1" (click)="editarCita(cita)" title="Detalles/Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm" (click)="cambiarEstado(cita, 4)" title="Finalizar" *ngIf="cita.nombre_estado != 'Completada'">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="citas.length === 0">
+                            <td colspan="7" class="text-center">No hay citas registradas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</section>

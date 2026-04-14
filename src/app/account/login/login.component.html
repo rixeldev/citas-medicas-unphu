@@ -1,65 +1,55 @@
-<body class="login-page" style="min-height: 466px;">
-    <div class="login-box">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="assets/logo2.png" alt="User profile picture">
-                </div>
-                <a class="h3"><b>Citas Medicas</b></a>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="logo-wrapper">
+                <img src="assets/logo3.png" alt="UNPHU Logo">
             </div>
-            <div class="card-body">
-                <p class="login-box-msg">Inicia sesión</p>
-
-                <form autocomplete="off" [formGroup]="forma" (ngSubmit)="login()">
-                    <div class="input-group mb-3 d-flex flex-column">
-                      <div class="d-flex flex-row">
-                        <input type="text" formControlName="codusuario" [class.is-invalid]="usuarioNoValido" class="form-control" placeholder="Usuario">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                          <small *ngIf="usuarioNoValido" class="text-danger"><i
-                        class="fafa-exclamation-triangle"></i>El
-                    usuario es Requerido</small>
-                    </div>
-                    <div class="input-group mb-3 d-flex flex-column">
-                      <div class="d-flex flex-row">
-                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="codclave" [class.is-invalid]="claveNoValido">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <small *ngIf="claveNoValido" class="text-danger"><i class="fa
-                    fa-exclamation-triangle"></i>La Contraseña es Requerida</small>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Iniciar</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-
-
-            </div>
-            <!-- /.card-body -->
+            <h1>Citas Médicas</h1>
+            <p>Bienvenido, por favor inicia sesión</p>
         </div>
-        <!-- /.card -->
+
+        <form autocomplete="off" [formGroup]="forma" (ngSubmit)="login()">
+
+            <div class="form-group">
+                <label class="input-label" for="usuario">Usuario</label>
+                <div class="input-wrapper">
+                    <input type="text"
+                           id="usuario"
+                           formControlName="codusuario"
+                           [class.is-invalid]="usuarioNoValido"
+                           class="input-field"
+                           placeholder="Escribe tu usuario">
+                    <span class="input-icon fas fa-user"></span>
+                </div>
+                <div *ngIf="usuarioNoValido" class="error-msg">
+                    <i class="fas fa-exclamation-circle"></i> El usuario es requerido
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="input-label" for="password">Contraseña</label>
+                <div class="input-wrapper">
+                    <input type="password"
+                           id="password"
+                           formControlName="codclave"
+                           [class.is-invalid]="claveNoValido"
+                           class="input-field"
+                           placeholder="••••••••">
+                    <span class="input-icon fas fa-lock"></span>
+                </div>
+                <div *ngIf="claveNoValido" class="error-msg">
+                    <i class="fas fa-exclamation-circle"></i> La contraseña es requerida
+                </div>
+            </div>
+
+            <button type="submit" class="login-button">
+                <span>Ingresar al sistema</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <div class="footer-text">
+                &copy; {{ currentYear }} UNPHU - Gestión de Citas
+            </div>
+        </form>
     </div>
-    <!-- /.login-box -->
-
-
-</body>
+</div>
