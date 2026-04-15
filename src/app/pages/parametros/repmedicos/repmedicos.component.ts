@@ -6,11 +6,11 @@ import { EncdescService } from 'src/app/services/encdesc.service';
 import { PdfExportService } from 'src/app/services/pdf-export.service';
 
 @Component({
-  selector: 'app-repusuarios',
-  templateUrl: './repusuarios.component.html',
-  styleUrls: ['./repusuarios.component.css'],
+  selector: 'app-repmedicos',
+  templateUrl: './repmedicos.component.html',
+  styleUrls: ['./repmedicos.component.css'],
 })
-export class RepusuariosComponent implements OnInit {
+export class RepmedicosComponent implements OnInit {
   muestra = false;
   reporte: any[] = [];
   cant = '0';
@@ -43,14 +43,13 @@ export class RepusuariosComponent implements OnInit {
 
   getreporte() {
     const datos = {
-      codigousuario: this.login_data.usuario,
       jwt: this.login_data.jwt,
     };
 
     this.cant = '0';
     this.reporte = [];
 
-    this.serv.consultas(datos, 'usuarios/listall.php').subscribe(
+    this.serv.consultas(datos, 'medicos/listall.php').subscribe(
       (resp: any) => {
         if (resp.status && Array.isArray(resp.data)) {
           const rows = resp.data as any[];
@@ -77,10 +76,10 @@ export class RepusuariosComponent implements OnInit {
   }
 
   generarpdf() {
-    const el = document.getElementById('htmlDataUsuarios');
+    const el = document.getElementById('htmlDataMedicos');
     void this.pdfExport.exportHtmlElementToPdf(
       el,
-      `${new Date().toISOString()}_reporte_usuarios.pdf`,
+      `${new Date().toISOString()}_reporte_medicos.pdf`,
     );
   }
 }

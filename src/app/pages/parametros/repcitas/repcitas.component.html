@@ -1,6 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
-
-<!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -17,115 +14,72 @@
             <div class="col-md-8">
                 <div class="card ">
                     <div class="card-header" style="background-color: #0069d9;">
-                        <h3  style="color: aliceblue;" class="card-title"><br> Usuarios</h3>
+                        <h3 style="color: aliceblue;" class="card-title"><br> Citas por estado</h3>
                     </div>
                     <form [formGroup]="forma" (ngSubmit)="generar()">
                         <div class="card-body">
-
-
-                
-
                             <div class="form-group">
-                                <label for="direccion">Estado:</label>
-                                <select formControlName="estado" name="estado" id="estado" class="form-control">
-                              <option value="A" selected>Activo</option>
-                              <option value="I">Inactivo</option>
-                              <option value="%">Todos</option>
-                          </select>
+                                <label for="estado-cita">Estado:</label>
+                                <select formControlName="estado" id="estado-cita" class="form-control">
+                                    <option value="A">Activo</option>
+                                    <option value="I">Inactivo</option>
+                                    <option value="%">Todos</option>
+                                </select>
                             </div>
-
                         </div>
                         <div class="card-footer">
                             <div class="col">
-
-
                                 <button (click)="getreporte()" type="submit" class="btn btn-info mr-1 mb-1 waves-effect waves-light">
-                              <i class="fa fa-search"></i>
-                              Visualizar
-                          </button>
-                                <button (click)="generarpdf()" class="btn btn-success mr-1 mb-1 waves-effect waves-light">
-                           <i class="fa fa-save"></i>
-                           Generar PDF
-                       </button>
+                                    <i class="fa fa-search"></i>
+                                    Visualizar
+                                </button>
+                                <button type="button" (click)="generarpdf()" class="btn btn-success mr-1 mb-1 waves-effect waves-light">
+                                    <i class="fa fa-save"></i>
+                                    Generar PDF
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-
-
-<section *ngIf="muestra">
-    <div class="wrapper" id="htmlData">
-        <!-- Main content -->
-        <section class="invoice">
-            <!-- title row -->
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="page-header">
-                        Sistema de RentCar
-                        <small class="float-right">Fecha: {{fecha}} <br>Usuario: {{nombre_usuario}}</small>
-
-                    </h2>
+<section *ngIf="muestra" class="content report-preview-section">
+    <div class="container-fluid">
+        <div class="report-preview" id="htmlDataCitas">
+            <div class="report-preview__header">
+                <div>
+                    <h2 class="report-preview__title">Sistema de Citas Médicas UNPHU</h2>
+                    <p class="report-preview__subtitle">Reporte de citas (por estado)</p>
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- info row -->
-            <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-
-                    <address>
-        <br><br>
-<strong>Reporte de Usuarios</strong>
-<br>
-</address>
+                <div class="report-preview__meta">
+                    <div>Fecha: {{ fecha }}</div>
+                    <div>Usuario: {{ nombre_usuario }}</div>
                 </div>
-
             </div>
-            <!-- /.row -->
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                
-                                <th>nombre_estado </th>
-                                <th>total_citas </th>
-                                <th>fecha </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of reporte">
-                                              
-        <td>{{item.nombre_estado }}</td>
-        <td>{{item.total_citas }}</td>
-        <td>{{item.fecha }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.col -->
+            <div class="report-preview__table-wrap table-responsive">
+                <table class="table table-sm table-bordered table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Estado</th>
+                            <th>Total citas</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of reporte">
+                            <td>{{ item.nombre_estado }}</td>
+                            <td>{{ item.total_citas }}</td>
+                            <td>{{ item.fecha }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <!-- /.row -->
-
-            <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-                    <b class="lead">Total: {{this.cant}}</b>
-
-                </div>
-
+            <div class="report-preview__footer">
+                <strong>Total: {{ cant }}</strong>
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
+        </div>
     </div>
-    <!-- ./wrapper -->
-
 </section>

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Reporte de usuarios</h1>
+                <h1>Reporte de pacientes</h1>
             </div>
         </div>
     </div>
@@ -14,13 +14,13 @@
             <div class="col-md-8">
                 <div class="card ">
                     <div class="card-header" style="background-color: #0069d9;">
-                        <h3 style="color: aliceblue;" class="card-title"><br> Usuarios</h3>
+                        <h3 style="color: aliceblue;" class="card-title"><br> Pacientes</h3>
                     </div>
                     <form [formGroup]="forma" (ngSubmit)="generar()">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="estado-usu">Estado:</label>
-                                <select formControlName="estado" id="estado-usu" class="form-control">
+                                <label for="estado-pac">Estado:</label>
+                                <select formControlName="estado" id="estado-pac" class="form-control">
                                     <option value="A">Activo</option>
                                     <option value="I">Inactivo</option>
                                     <option value="%">Todos</option>
@@ -48,11 +48,11 @@
 
 <section *ngIf="muestra" class="content report-preview-section">
     <div class="container-fluid">
-        <div class="report-preview" id="htmlDataUsuarios">
+        <div class="report-preview" id="htmlDataPacientes">
             <div class="report-preview__header">
                 <div>
                     <h2 class="report-preview__title">Sistema de Citas Médicas UNPHU</h2>
-                    <p class="report-preview__subtitle">Reporte de usuarios</p>
+                    <p class="report-preview__subtitle">Reporte de pacientes</p>
                 </div>
                 <div class="report-preview__meta">
                     <div>Fecha: {{ fecha }}</div>
@@ -65,15 +65,17 @@
                         <tr>
                             <th>Código</th>
                             <th>Nombre</th>
-                            <th>Usuario</th>
+                            <th>Apellido</th>
+                            <th>Documento</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of reporte">
-                            <td>{{ item.id_usuario }}</td>
-                            <td>{{ item.nombre_completo }}</td>
-                            <td>{{ item.nombre_usuario }}</td>
+                            <td>{{ item.id_paciente }}</td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido_paterno }}</td>
+                            <td>{{ item.numero_documento }}</td>
                             <td>
                                 <span *ngIf="item.activo === 1" class="text-success">Activo</span>
                                 <span *ngIf="item.activo === 0" class="text-danger">Inactivo</span>

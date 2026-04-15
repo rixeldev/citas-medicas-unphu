@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { EncdescService } from 'src/app/services/encdesc.service';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,8 +22,7 @@ export class DespachoComponent implements OnInit {
   constructor(
     private serv: DataService,
     private encrp: EncdescService,
-    private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.login_data = this.encrp.decryptData(localStorage.getItem('meta'));
@@ -80,12 +78,6 @@ export class DespachoComponent implements OnInit {
   getNombreEstado(id: any) {
     const state = this.estados.find(e => e.id_estado == id);
     return state ? state.nombre_estado : 'Desconocido';
-  }
-
-  editarCita(cita: any) {
-    // We navigate to the existing addcitas component in edit mode
-    const encryptedCita = this.encrp.encryptData(JSON.stringify(cita));
-    this.router.navigate(['/dashboard/citas', encryptedCita]);
   }
 
   setOrderBy(key: string) {

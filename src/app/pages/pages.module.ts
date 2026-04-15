@@ -20,6 +20,8 @@ import { AddmedicoComponent } from './parametros/addmedico/addmedico.component';
 import { RepusuariosComponent } from './parametros/repusuarios/repusuarios.component';
 import { AddcitasComponent } from './parametros/addcitas/addcitas.component';
 import { RepcitasComponent } from './parametros/repcitas/repcitas.component';
+import { ReppacientesComponent } from './parametros/reppacientes/reppacientes.component';
+import { RepmedicosComponent } from './parametros/repmedicos/repmedicos.component';
 import { DespachoComponent } from './parametros/despacho/despacho.component';
 
 @NgModule({
@@ -37,6 +39,8 @@ import { DespachoComponent } from './parametros/despacho/despacho.component';
     RepusuariosComponent,
     AddcitasComponent,
     RepcitasComponent,
+    ReppacientesComponent,
+    RepmedicosComponent,
     DespachoComponent,
   ],
   imports: [

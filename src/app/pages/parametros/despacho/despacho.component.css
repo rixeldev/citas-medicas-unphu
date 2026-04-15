@@ -1,25 +1,65 @@
+/* Evita que la tarjeta o el cuerpo recorten el menú flotante de estados */
+:host ::ng-deep .despacho-page .card {
+  overflow: visible;
+}
+
+.despacho-page .despacho-card-body {
+  overflow: visible;
+}
+
+.despacho-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+/* La fila activa queda por encima de la siguiente para que el dropdown no quede tapado */
+.despacho-table tbody tr {
+  position: relative;
+}
+
+.despacho-table tbody tr:hover {
+  z-index: 3;
+}
+
+.despacho-estado-cell {
+  position: relative;
+  vertical-align: middle;
+  min-width: 11rem;
+}
+
+.despacho-estado-dropdown .dropdown-menu {
+  z-index: 1060;
+  max-height: min(70vh, 22rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.despacho-estado-dropdown.show {
+  z-index: 1060;
+}
+
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.05);
+  background-color: rgba(0, 123, 255, 0.05);
 }
 
 .dropdown-item i {
-    font-size: 10px;
-    margin-right: 8px;
-    vertical-align: middle;
+  font-size: 10px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 th i {
-    font-size: 12px;
-    color: #ccc;
-    margin-left: 5px;
+  font-size: 12px;
+  color: #ccc;
+  margin-left: 5px;
 }
 
 th:hover i {
-    color: #666;
+  color: #666;
 }
 
 .badge-status {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
 }

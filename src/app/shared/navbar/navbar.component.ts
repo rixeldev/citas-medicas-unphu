@@ -76,6 +76,16 @@ export class NavbarComponent implements OnInit {
           icono: 'nav-icon fas fa-file',
         },
         {
+          name: 'Pacientes',
+          url: '/dashboard/reppacientes',
+          icono: 'nav-icon fas fa-file',
+        },
+        {
+          name: 'Médicos',
+          url: '/dashboard/repmedicos',
+          icono: 'nav-icon fas fa-file',
+        },
+        {
           name: 'Citas',
           url: '/dashboard/repcitas',
           icono: 'nav-icon fas fa-file',
@@ -108,6 +118,11 @@ export class NavbarComponent implements OnInit {
           {
             name: 'Citas',
             url: '/dashboard/repcitas',
+            icono: 'nav-icon fas fa-file',
+          },
+          {
+            name: 'Pacientes',
+            url: '/dashboard/reppacientes',
             icono: 'nav-icon fas fa-file',
           },
         ];

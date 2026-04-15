@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<section class="content">
+<section class="content despacho-page">
     <div class="container-fluid">
         <div class="card card-outline card-primary">
             <div class="card-header">
@@ -22,9 +22,9 @@
                     </div>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+            <!-- /.card-header — sin table-responsive para que el menú de estados no quede recortado -->
+            <div class="card-body p-0 despacho-card-body">
+                <table class="table table-hover table-bordered mb-0 despacho-table">
                     <thead>
                         <tr>
                             <th (click)="setOrderBy('numero_cita')" style="cursor: pointer;">
@@ -53,26 +53,23 @@
                             <td>{{cita.hora_inicio}}</td>
                             <td><strong>{{cita.nombre_paciente}}</strong></td>
                             <td>{{cita.nombre_medico}}</td>
-                            <td>
-                                <div class="btn-group">
+                            <td class="despacho-estado-cell">
+                                <div class="btn-group despacho-estado-dropdown">
                                     <button type="button" class="btn btn-sm" [style.background-color]="cita.color_hex || '#ccc'" style="color: white; font-weight: bold;">
                                         {{cita.nombre_estado}}
                                     </button>
-                                    <button type="button" class="btn btn-sm dropdown-toggle dropdown-icon" [style.background-color]="cita.color_hex || '#ccc'" style="color: white;" data-toggle="dropdown">
-                                        <span class="sr-only">Toggle Dropdown</span>
+                                    <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" [style.background-color]="cita.color_hex || '#ccc'" style="color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Estados</span>
                                     </button>
-                                    <div class="dropdown-menu" role="menu">
-                                        <a class="dropdown-item" *ngFor="let est of estados" (click)="cambiarEstado(cita, est.id_estado)" style="cursor: pointer;">
+                                    <div class="dropdown-menu dropdown-menu-right despacho-estado-menu" role="menu">
+                                        <a class="dropdown-item" href="javascript:void(0)" *ngFor="let est of estados" (click)="cambiarEstado(cita, est.id_estado)">
                                             <i class="fas fa-circle" [style.color]="est.color_hex"></i> {{est.nombre_estado}}
                                         </a>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <button class="btn btn-info btn-sm mr-1" (click)="editarCita(cita)" title="Detalles/Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-success btn-sm" (click)="cambiarEstado(cita, 4)" title="Finalizar" *ngIf="cita.nombre_estado != 'Completada'">
+                            <td class="text-nowrap">
+                                <button type="button" class="btn btn-success btn-sm" (click)="cambiarEstado(cita, 4)" title="Marcar como completada" *ngIf="cita.nombre_estado != 'Completada'">
                                     <i class="fas fa-check"></i>
                                 </button>
                             </td>

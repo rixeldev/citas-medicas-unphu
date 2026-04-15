@@ -17,6 +17,8 @@ import { AddmedicoComponent } from './pages/parametros/addmedico/addmedico.compo
 import { RepusuariosComponent } from './pages/parametros/repusuarios/repusuarios.component';
 import { AddcitasComponent } from './pages/parametros/addcitas/addcitas.component';
 import { RepcitasComponent } from './pages/parametros/repcitas/repcitas.component';
+import { ReppacientesComponent } from './pages/parametros/reppacientes/reppacientes.component';
+import { RepmedicosComponent } from './pages/parametros/repmedicos/repmedicos.component';
 import { DespachoComponent } from './pages/parametros/despacho/despacho.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -38,6 +40,8 @@ const routes: Routes = [
       { path: 'despacho', component: DespachoComponent },
       { path: 'repusuario', component: RepusuariosComponent },
       { path: 'repcitas', component: RepcitasComponent },
+      { path: 'reppacientes', component: ReppacientesComponent },
+      { path: 'repmedicos', component: RepmedicosComponent },
     ],
   },
   { path: 'login', component: LoginComponent },
